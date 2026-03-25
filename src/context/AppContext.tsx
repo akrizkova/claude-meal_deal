@@ -1,10 +1,10 @@
 import { createContext, useContext, useReducer, useEffect, type ReactNode } from 'react';
-import type { ShopId, Preferences, Combination, SlotType, MealDealItem } from '../types';
+import type { ShopId, Preferences, Combination, SlotType, MealDealItem, DietaryType } from '../types';
 import type { MainCategory, SnackCategory, DrinkCategory } from '../types';
 import { ALL_MAIN_CATEGORIES, ALL_SNACK_CATEGORIES, ALL_DRINK_CATEGORIES } from '../types';
 import { shopById } from '../data';
 
-// ── State ────────────────────────────────────────────────────────────────────
+// ── State ─────────────────────────────────────────────────────────────────────
 
 export type Screen = 'shop' | 'preferences' | 'combination' | 'saved';
 
@@ -38,17 +38,36 @@ function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 }
 
+function matchesDietary(item: MealDealItem, dietary: DietaryType, glutenFree: boolean): boolean {
+  if (glutenFree && !item.isGlutenFree) return false;
+  switch (dietary) {
+    case 'vegan': return !!item.isVegan;
+    case 'vegetarian': return !!item.isVegetarian || !!item.isVegan;
+    case 'pescetarian': return !!item.isPescetarian || !!item.isVegetarian || !!item.isVegan;
+    default: return true;
+  }
+}
+
 function buildCombination(shopId: ShopId, preferences: Preferences): Combination | null {
   const shop = shopById[shopId];
 
   const mainItems = shop.items.filter(
-    (i) => i.slot === 'main' && preferences.mains.includes(i.category as MainCategory),
+    (i) =>
+      i.slot === 'main' &&
+      preferences.mains.includes(i.category as MainCategory) &&
+      matchesDietary(i, preferences.dietary, preferences.glutenFree),
   );
   const snackItems = shop.items.filter(
-    (i) => i.slot === 'snack' && preferences.snacks.includes(i.category as SnackCategory),
+    (i) =>
+      i.slot === 'snack' &&
+      preferences.snacks.includes(i.category as SnackCategory) &&
+      matchesDietary(i, preferences.dietary, preferences.glutenFree),
   );
   const drinkItems = shop.items.filter(
-    (i) => i.slot === 'drink' && preferences.drinks.includes(i.category as DrinkCategory),
+    (i) =>
+      i.slot === 'drink' &&
+      preferences.drinks.includes(i.category as DrinkCategory) &&
+      matchesDietary(i, preferences.dietary, preferences.glutenFree),
   );
 
   if (!mainItems.length || !snackItems.length || !drinkItems.length) return null;
@@ -68,29 +87,42 @@ function shuffleSlot(combination: Combination, slot: SlotType, preferences: Pref
 
   if (slot === 'main') {
     pool = shop.items.filter(
-      (i) => i.slot === 'main' && preferences.mains.includes(i.category as MainCategory),
+      (i) =>
+        i.slot === 'main' &&
+        preferences.mains.includes(i.category as MainCategory) &&
+        matchesDietary(i, preferences.dietary, preferences.glutenFree),
     );
   } else if (slot === 'snack') {
     pool = shop.items.filter(
-      (i) => i.slot === 'snack' && preferences.snacks.includes(i.category as SnackCategory),
+      (i) =>
+        i.slot === 'snack' &&
+        preferences.snacks.includes(i.category as SnackCategory) &&
+        matchesDietary(i, preferences.dietary, preferences.glutenFree),
     );
   } else {
     pool = shop.items.filter(
-      (i) => i.slot === 'drink' && preferences.drinks.includes(i.category as DrinkCategory),
+      (i) =>
+        i.slot === 'drink' &&
+        preferences.drinks.includes(i.category as DrinkCategory) &&
+        matchesDietary(i, preferences.dietary, preferences.glutenFree),
     );
   }
 
   if (pool.length <= 1) return combination;
-
-  // Avoid picking the same item
   const current = combination[slot];
   const filtered = pool.filter((i) => i.id !== current.id);
-  const newItem = pickRandom(filtered.length ? filtered : pool);
-
-  return { ...combination, [slot]: newItem };
+  return { ...combination, [slot]: pickRandom(filtered.length ? filtered : pool) };
 }
 
 // ── Reducer ───────────────────────────────────────────────────────────────────
+
+const defaultPreferences: Preferences = {
+  mains: [...ALL_MAIN_CATEGORIES],
+  snacks: [...ALL_SNACK_CATEGORIES],
+  drinks: [...ALL_DRINK_CATEGORIES],
+  dietary: 'none',
+  glutenFree: false,
+};
 
 function reducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
@@ -98,11 +130,7 @@ function reducer(state: AppState, action: AppAction): AppState {
       return {
         ...state,
         selectedShop: action.payload,
-        preferences: {
-          mains: [...ALL_MAIN_CATEGORIES],
-          snacks: [...ALL_SNACK_CATEGORIES],
-          drinks: [...ALL_DRINK_CATEGORIES],
-        },
+        preferences: { ...defaultPreferences },
         screen: 'preferences',
       };
 
@@ -175,11 +203,7 @@ function loadSaved(): Combination[] {
 const initialState: AppState = {
   screen: 'shop',
   selectedShop: null,
-  preferences: {
-    mains: [...ALL_MAIN_CATEGORIES],
-    snacks: [...ALL_SNACK_CATEGORIES],
-    drinks: [...ALL_DRINK_CATEGORIES],
-  },
+  preferences: { ...defaultPreferences },
   currentCombination: null,
   savedCombinations: loadSaved(),
 };

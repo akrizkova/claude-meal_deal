@@ -3,9 +3,14 @@ import { useApp } from '../context/AppContext';
 import type { ShopId } from '../types';
 
 const shopEmoji: Record<ShopId, string> = {
-  tesco: '🔵',
-  sainsburys: '🟠',
-  morrisons: '🟡',
+  tesco:         '🔵',
+  sainsburys:    '🟠',
+  morrisons:     '🟡',
+  boots:         '💊',
+  coop:          '🤝',
+  marks_spencer: '🖤',
+  greggs:        '🥐',
+  pret:          '🔴',
 };
 
 export function ShopScreen() {
@@ -18,22 +23,22 @@ export function ShopScreen() {
         <p className="text-gray-500 text-sm">Choose your shop to get started</p>
       </div>
 
-      <div className="flex flex-col gap-4 px-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-5 max-w-5xl mx-auto w-full">
         {shops.map((shop) => (
           <button
             key={shop.id}
             onClick={() => dispatch({ type: 'SELECT_SHOP', payload: shop.id })}
-            className={`flex items-center gap-4 p-5 rounded-2xl border-2 ${shop.borderColour} bg-white shadow-sm active:scale-95 transition-transform`}
+            className={`flex items-center gap-3 p-5 rounded-2xl border-2 ${shop.borderColour} bg-white shadow-sm active:scale-95 transition-transform hover:shadow-md`}
           >
-            <span className="text-4xl">{shopEmoji[shop.id]}</span>
-            <span className={`text-xl font-bold ${shop.textColour}`}>{shop.displayName}</span>
-            <span className="ml-auto text-gray-400 text-lg">›</span>
+            <span className="text-3xl">{shopEmoji[shop.id]}</span>
+            <span className={`text-lg font-bold ${shop.textColour}`}>{shop.displayName}</span>
+            <span className="ml-auto text-gray-400">›</span>
           </button>
         ))}
       </div>
 
       <p className="text-center text-xs text-gray-400 mt-auto mb-4 px-5">
-        Prices and availability may vary. Items shown are representative of typical meal deal ranges.
+        Items shown are representative of typical meal deal ranges.
       </p>
     </div>
   );

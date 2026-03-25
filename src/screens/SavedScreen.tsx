@@ -6,7 +6,7 @@ export function SavedScreen() {
 
   return (
     <div className="flex flex-col min-h-svh pb-20">
-      <div className="px-5 pt-10 pb-6">
+      <div className="px-5 pt-10 pb-6 max-w-5xl mx-auto w-full">
         <h2 className="text-2xl font-bold text-gray-900">Saved deals</h2>
         <p className="text-gray-500 text-sm mt-1">
           {state.savedCombinations.length === 0
@@ -29,7 +29,7 @@ export function SavedScreen() {
           </button>
         </div>
       ) : (
-        <div className="flex flex-col gap-3 px-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 px-5 max-w-5xl mx-auto w-full">
           {state.savedCombinations.map((combo) => (
             <SavedCombinationCard
               key={combo.id}

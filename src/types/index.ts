@@ -1,10 +1,12 @@
-export type ShopId = 'tesco' | 'sainsburys' | 'morrisons';
+export type ShopId = 'tesco' | 'sainsburys' | 'morrisons' | 'boots' | 'coop' | 'marks_spencer' | 'greggs' | 'pret';
 
-export type MainCategory = 'sandwich' | 'wrap' | 'salad' | 'sushi' | 'pasta' | 'soup' | 'hot food';
-export type SnackCategory = 'crisps' | 'savoury snack' | 'chocolate' | 'sweet snack' | 'fruit' | 'cake/pastry';
-export type DrinkCategory = 'water' | 'juice' | 'fizzy drink' | 'hot drink' | 'smoothie' | 'energy drink';
+export type MainCategory = 'sandwich' | 'wrap' | 'salad' | 'sushi' | 'pasta' | 'soup' | 'hot food' | 'baguette' | 'roll' | 'bowl';
+export type SnackCategory = 'crisps' | 'savoury snack' | 'chocolate' | 'sweet snack' | 'fruit' | 'cake/pastry' | 'cereal bar' | 'nuts';
+export type DrinkCategory = 'water' | 'juice' | 'fizzy drink' | 'hot drink' | 'smoothie' | 'energy drink' | 'iced coffee';
 
 export type SlotType = 'main' | 'snack' | 'drink';
+
+export type DietaryType = 'none' | 'vegetarian' | 'vegan' | 'pescetarian';
 
 export interface MealDealItem {
   id: string;
@@ -16,14 +18,16 @@ export interface MealDealItem {
   kcal?: number;
   isVegetarian?: boolean;
   isVegan?: boolean;
+  isPescetarian?: boolean; // no meat, fish ok
+  isGlutenFree?: boolean;
 }
 
 export interface ShopDefinition {
   id: ShopId;
   displayName: string;
-  colour: string;       // tailwind bg colour class
-  textColour: string;   // tailwind text colour class
-  borderColour: string; // tailwind border colour class
+  colour: string;
+  textColour: string;
+  borderColour: string;
   items: MealDealItem[];
 }
 
@@ -31,6 +35,8 @@ export interface Preferences {
   mains: MainCategory[];
   snacks: SnackCategory[];
   drinks: DrinkCategory[];
+  dietary: DietaryType;
+  glutenFree: boolean;
 }
 
 export interface Combination {
@@ -43,13 +49,13 @@ export interface Combination {
 }
 
 export const ALL_MAIN_CATEGORIES: MainCategory[] = [
-  'sandwich', 'wrap', 'salad', 'sushi', 'pasta', 'soup', 'hot food',
+  'sandwich', 'wrap', 'salad', 'sushi', 'pasta', 'soup', 'hot food', 'baguette', 'roll', 'bowl',
 ];
 
 export const ALL_SNACK_CATEGORIES: SnackCategory[] = [
-  'crisps', 'savoury snack', 'chocolate', 'sweet snack', 'fruit', 'cake/pastry',
+  'crisps', 'savoury snack', 'chocolate', 'sweet snack', 'fruit', 'cake/pastry', 'cereal bar', 'nuts',
 ];
 
 export const ALL_DRINK_CATEGORIES: DrinkCategory[] = [
-  'water', 'juice', 'fizzy drink', 'hot drink', 'smoothie', 'energy drink',
+  'water', 'juice', 'fizzy drink', 'hot drink', 'smoothie', 'energy drink', 'iced coffee',
 ];

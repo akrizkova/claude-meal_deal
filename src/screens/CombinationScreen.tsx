@@ -38,44 +38,47 @@ export function CombinationScreen() {
           ‹ Back
         </button>
         <h2 className="text-2xl font-bold text-white">Your meal deal</h2>
-        <p className="text-white/80 text-sm mt-1">{shop.displayName} • Tap 🔀 to shuffle any item</p>
+        <p className="text-white/80 text-sm mt-1">{shop.displayName} · Tap 🔀 to shuffle any item</p>
       </div>
 
-      <div className="flex-1 flex flex-col gap-3 px-5 pt-5">
-        <MealSlot slot="main" item={combo.main} onShuffle={() => handleShuffle('main')} />
-        <MealSlot slot="snack" item={combo.snack} onShuffle={() => handleShuffle('snack')} />
-        <MealSlot slot="drink" item={combo.drink} onShuffle={() => handleShuffle('drink')} />
+      <div className="flex-1 max-w-4xl w-full mx-auto px-5 pt-5">
+        {/* On desktop: 3 slots side by side */}
+        <div className="flex flex-col md:flex-row gap-3">
+          <div className="flex-1">
+            <MealSlot slot="main"  item={combo.main}  onShuffle={() => handleShuffle('main')}  />
+          </div>
+          <div className="flex-1">
+            <MealSlot slot="snack" item={combo.snack} onShuffle={() => handleShuffle('snack')} />
+          </div>
+          <div className="flex-1">
+            <MealSlot slot="drink" item={combo.drink} onShuffle={() => handleShuffle('drink')} />
+          </div>
+        </div>
       </div>
 
-      <div className="px-5 pt-4 flex flex-col gap-3">
+      <div className="px-5 pt-4 max-w-4xl w-full mx-auto flex flex-col gap-3 md:flex-row-reverse">
         <button
           onClick={handleSave}
           disabled={isSaved}
-          className={`w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all ${
+          className={`flex-1 py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all ${
             isSaved
               ? 'bg-red-50 text-red-500 border-2 border-red-200'
               : 'bg-red-500 text-white active:opacity-80'
           }`}
         >
-          {isSaved ? (
-            <>❤️ Saved</>
-          ) : justSaved ? (
-            <>✓ Saved!</>
-          ) : (
-            <>🤍 Save this deal</>
-          )}
+          {isSaved ? <>❤️ Saved</> : justSaved ? <>✓ Saved!</> : <>🤍 Save this deal</>}
         </button>
 
         <button
           onClick={() => dispatch({ type: 'GENERATE_COMBINATION' })}
-          className="w-full py-3 rounded-2xl border-2 border-gray-200 text-gray-700 font-medium text-sm active:bg-gray-50 transition-colors"
+          className="flex-1 py-3 rounded-2xl border-2 border-gray-200 text-gray-700 font-medium text-sm active:bg-gray-50 transition-colors"
         >
           Shuffle everything
         </button>
 
         <button
           onClick={() => dispatch({ type: 'RESET' })}
-          className="text-center text-sm text-gray-400 py-1"
+          className="text-center text-sm text-gray-400 py-1 md:self-center md:px-3"
         >
           Start over
         </button>

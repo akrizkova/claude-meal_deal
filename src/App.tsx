@@ -9,12 +9,15 @@ function AppContent() {
   const { state } = useApp();
 
   return (
-    <div className="max-w-md mx-auto bg-gray-50 min-h-svh relative">
-      {state.screen === 'shop' && <ShopScreen />}
-      {state.screen === 'preferences' && <PreferencesScreen />}
-      {state.screen === 'combination' && <CombinationScreen />}
-      {state.screen === 'saved' && <SavedScreen />}
+    <div className="bg-gray-50 min-h-svh">
       <NavBar />
+      {/* offset for desktop top nav */}
+      <div className="md:pt-14">
+        {state.screen === 'shop'        && <ShopScreen />}
+        {state.screen === 'preferences' && <PreferencesScreen />}
+        {state.screen === 'combination' && <CombinationScreen />}
+        {state.screen === 'saved'       && <SavedScreen />}
+      </div>
     </div>
   );
 }

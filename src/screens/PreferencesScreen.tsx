@@ -7,25 +7,35 @@ import {
   ALL_SNACK_CATEGORIES,
   ALL_DRINK_CATEGORIES,
 } from '../types';
-import type { MainCategory, SnackCategory, DrinkCategory } from '../types';
+import type { MainCategory, SnackCategory, DrinkCategory, DietaryType } from '../types';
+
+const DIETARY_OPTIONS: { value: DietaryType; label: string; emoji: string }[] = [
+  { value: 'none',         label: 'No preference', emoji: '🍽️' },
+  { value: 'vegetarian',  label: 'Vegetarian',     emoji: '🥗' },
+  { value: 'vegan',       label: 'Vegan',          emoji: '🌱' },
+  { value: 'pescetarian', label: 'Pescetarian',    emoji: '🐟' },
+];
 
 export function PreferencesScreen() {
   const { state, dispatch } = useApp();
   const shop = shopById[state.selectedShop!];
 
-  const [mains, setMains] = useState<MainCategory[]>([...ALL_MAIN_CATEGORIES]);
-  const [snacks, setSnacks] = useState<SnackCategory[]>([...ALL_SNACK_CATEGORIES]);
-  const [drinks, setDrinks] = useState<DrinkCategory[]>([...ALL_DRINK_CATEGORIES]);
+  const [mains, setMains]       = useState<MainCategory[]>([...ALL_MAIN_CATEGORIES]);
+  const [snacks, setSnacks]     = useState<SnackCategory[]>([...ALL_SNACK_CATEGORIES]);
+  const [drinks, setDrinks]     = useState<DrinkCategory[]>([...ALL_DRINK_CATEGORIES]);
+  const [dietary, setDietary]   = useState<DietaryType>('none');
+  const [glutenFree, setGlutenFree] = useState(false);
 
   function handleGenerate() {
     dispatch({
       type: 'SET_PREFERENCES',
-      payload: { mains, snacks, drinks },
+      payload: { mains, snacks, drinks, dietary, glutenFree },
     });
   }
 
   return (
     <div className="flex flex-col min-h-svh pb-20">
+      {/* Header */}
       <div className={`${shop.colour} px-5 pt-10 pb-6`}>
         <button
           onClick={() => dispatch({ type: 'NAVIGATE', payload: 'shop' })}
@@ -37,31 +47,66 @@ export function PreferencesScreen() {
         <p className="text-white/80 text-sm mt-1">Pick your preferences</p>
       </div>
 
-      <div className="flex-1 px-5 pt-6">
-        <PreferenceCategoryGroup
-          label="Main"
-          emoji="🥙"
-          options={[...ALL_MAIN_CATEGORIES]}
-          selected={mains}
-          onChange={(v) => setMains(v as MainCategory[])}
-        />
-        <PreferenceCategoryGroup
-          label="Snack"
-          emoji="🍫"
-          options={[...ALL_SNACK_CATEGORIES]}
-          selected={snacks}
-          onChange={(v) => setSnacks(v as SnackCategory[])}
-        />
-        <PreferenceCategoryGroup
-          label="Drink"
-          emoji="🥤"
-          options={[...ALL_DRINK_CATEGORIES]}
-          selected={drinks}
-          onChange={(v) => setDrinks(v as DrinkCategory[])}
-        />
+      <div className="flex-1 px-5 pt-6 max-w-4xl w-full mx-auto">
+        {/* Dietary requirements */}
+        <div className="mb-6">
+          <h3 className="font-semibold text-gray-900 text-base mb-3">🥦 Dietary requirements</h3>
+          <div className="flex flex-wrap gap-2 mb-3">
+            {DIETARY_OPTIONS.map((opt) => (
+              <button
+                key={opt.value}
+                onClick={() => setDietary(opt.value)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
+                  dietary === opt.value
+                    ? 'bg-gray-900 text-white border-gray-900'
+                    : 'bg-white text-gray-600 border-gray-300'
+                }`}
+              >
+                <span>{opt.emoji}</span>
+                <span>{opt.label}</span>
+              </button>
+            ))}
+          </div>
+          <button
+            onClick={() => setGlutenFree((v) => !v)}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
+              glutenFree
+                ? 'bg-amber-600 text-white border-amber-600'
+                : 'bg-white text-gray-600 border-gray-300'
+            }`}
+          >
+            <span>🌾</span>
+            <span>Gluten-free</span>
+          </button>
+        </div>
+
+        {/* On desktop: 3 columns */}
+        <div className="md:grid md:grid-cols-3 md:gap-6">
+          <PreferenceCategoryGroup
+            label="Main"
+            emoji="🥙"
+            options={[...ALL_MAIN_CATEGORIES]}
+            selected={mains}
+            onChange={(v) => setMains(v as MainCategory[])}
+          />
+          <PreferenceCategoryGroup
+            label="Snack"
+            emoji="🍫"
+            options={[...ALL_SNACK_CATEGORIES]}
+            selected={snacks}
+            onChange={(v) => setSnacks(v as SnackCategory[])}
+          />
+          <PreferenceCategoryGroup
+            label="Drink"
+            emoji="🥤"
+            options={[...ALL_DRINK_CATEGORIES]}
+            selected={drinks}
+            onChange={(v) => setDrinks(v as DrinkCategory[])}
+          />
+        </div>
       </div>
 
-      <div className="px-5 pt-2">
+      <div className="px-5 pt-2 max-w-4xl w-full mx-auto">
         <button
           onClick={handleGenerate}
           className={`w-full py-4 rounded-2xl text-white font-bold text-base ${shop.colour} active:opacity-80 transition-opacity`}
