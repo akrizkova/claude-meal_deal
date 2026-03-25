@@ -1,17 +1,5 @@
 import { shops } from '../data';
 import { useApp } from '../context/AppContext';
-import type { ShopId } from '../types';
-
-const shopEmoji: Record<ShopId, string> = {
-  tesco:         '🔵',
-  sainsburys:    '🟠',
-  morrisons:     '🟡',
-  boots:         '💊',
-  coop:          '🤝',
-  marks_spencer: '🖤',
-  greggs:        '🥐',
-  pret:          '🔴',
-};
 
 export function ShopScreen() {
   const { dispatch } = useApp();
@@ -30,7 +18,6 @@ export function ShopScreen() {
             onClick={() => dispatch({ type: 'SELECT_SHOP', payload: shop.id })}
             className={`flex items-center gap-3 p-5 rounded-2xl border-2 ${shop.borderColour} bg-white shadow-sm active:scale-95 transition-transform hover:shadow-md`}
           >
-            <span className="text-3xl">{shopEmoji[shop.id]}</span>
             <span className={`text-lg font-bold ${shop.textColour}`}>{shop.displayName}</span>
             <span className="ml-auto text-gray-400">›</span>
           </button>

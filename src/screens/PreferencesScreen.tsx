@@ -16,6 +16,13 @@ const DIETARY_OPTIONS: { value: DietaryType; label: string; emoji: string }[] = 
   { value: 'pescetarian', label: 'Pescetarian',    emoji: '🐟' },
 ];
 
+const EXTRA_FILTERS: { key: 'glutenFree' | 'dairyFree' | 'halal' | 'nutFree'; label: string; emoji: string }[] = [
+  { key: 'glutenFree', label: 'Gluten-free', emoji: '🌾' },
+  { key: 'dairyFree',  label: 'Dairy-free',  emoji: '🥛' },
+  { key: 'halal',      label: 'Halal',       emoji: '☪️' },
+  { key: 'nutFree',    label: 'Nut-free',    emoji: '🥜' },
+];
+
 export function PreferencesScreen() {
   const { state, dispatch } = useApp();
   const shop = shopById[state.selectedShop!];
@@ -24,12 +31,16 @@ export function PreferencesScreen() {
   const [snacks, setSnacks]     = useState<SnackCategory[]>([...ALL_SNACK_CATEGORIES]);
   const [drinks, setDrinks]     = useState<DrinkCategory[]>([...ALL_DRINK_CATEGORIES]);
   const [dietary, setDietary]   = useState<DietaryType>('none');
-  const [glutenFree, setGlutenFree] = useState(false);
+  const [extras, setExtras]     = useState({ glutenFree: false, dairyFree: false, halal: false, nutFree: false });
+
+  function toggleExtra(key: keyof typeof extras) {
+    setExtras((prev) => ({ ...prev, [key]: !prev[key] }));
+  }
 
   function handleGenerate() {
     dispatch({
       type: 'SET_PREFERENCES',
-      payload: { mains, snacks, drinks, dietary, glutenFree },
+      payload: { mains, snacks, drinks, dietary, ...extras },
     });
   }
 
@@ -67,17 +78,22 @@ export function PreferencesScreen() {
               </button>
             ))}
           </div>
-          <button
-            onClick={() => setGlutenFree((v) => !v)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
-              glutenFree
-                ? 'bg-amber-600 text-white border-amber-600'
-                : 'bg-white text-gray-600 border-gray-300'
-            }`}
-          >
-            <span>🌾</span>
-            <span>Gluten-free</span>
-          </button>
+          <div className="flex flex-wrap gap-2">
+            {EXTRA_FILTERS.map((f) => (
+              <button
+                key={f.key}
+                onClick={() => toggleExtra(f.key)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
+                  extras[f.key]
+                    ? 'bg-amber-600 text-white border-amber-600'
+                    : 'bg-white text-gray-600 border-gray-300'
+                }`}
+              >
+                <span>{f.emoji}</span>
+                <span>{f.label}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* On desktop: 3 columns */}
