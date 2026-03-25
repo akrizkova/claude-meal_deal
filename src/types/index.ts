@@ -16,10 +16,14 @@ export interface MealDealItem {
   name: string;
   brand?: string;
   kcal?: number;
+  price: number;       // individual retail price in pence (e.g. 299 = £2.99)
   isVegetarian?: boolean;
   isVegan?: boolean;
-  isPescetarian?: boolean; // no meat, fish ok
+  isPescetarian?: boolean;
   isGlutenFree?: boolean;
+  isDairyFree?: boolean;
+  isHalal?: boolean;
+  isNutFree?: boolean;
 }
 
 export interface ShopDefinition {
@@ -28,6 +32,7 @@ export interface ShopDefinition {
   colour: string;
   textColour: string;
   borderColour: string;
+  mealDealPrice: number;  // bundle price in pence
   items: MealDealItem[];
 }
 
@@ -37,6 +42,9 @@ export interface Preferences {
   drinks: DrinkCategory[];
   dietary: DietaryType;
   glutenFree: boolean;
+  dairyFree: boolean;
+  halal: boolean;
+  nutFree: boolean;
 }
 
 export interface Combination {
@@ -59,3 +67,7 @@ export const ALL_SNACK_CATEGORIES: SnackCategory[] = [
 export const ALL_DRINK_CATEGORIES: DrinkCategory[] = [
   'water', 'juice', 'fizzy drink', 'hot drink', 'smoothie', 'energy drink', 'iced coffee',
 ];
+
+export function formatPrice(pence: number): string {
+  return `£${(pence / 100).toFixed(2)}`;
+}

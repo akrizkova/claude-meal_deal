@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer, useEffect, type ReactNode } from 'react';
-import type { ShopId, Preferences, Combination, SlotType, MealDealItem, DietaryType } from '../types';
+import type { ShopId, Preferences, Combination, SlotType, MealDealItem } from '../types';
 import type { MainCategory, SnackCategory, DrinkCategory } from '../types';
 import { ALL_MAIN_CATEGORIES, ALL_SNACK_CATEGORIES, ALL_DRINK_CATEGORIES } from '../types';
 import { shopById } from '../data';
@@ -38,13 +38,16 @@ function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 }
 
-function matchesDietary(item: MealDealItem, dietary: DietaryType, glutenFree: boolean): boolean {
-  if (glutenFree && !item.isGlutenFree) return false;
-  switch (dietary) {
-    case 'vegan': return !!item.isVegan;
-    case 'vegetarian': return !!item.isVegetarian || !!item.isVegan;
+function matchesDietary(item: MealDealItem, prefs: Preferences): boolean {
+  if (prefs.glutenFree && !item.isGlutenFree) return false;
+  if (prefs.dairyFree  && !item.isDairyFree)  return false;
+  if (prefs.halal      && !item.isHalal)       return false;
+  if (prefs.nutFree    && !item.isNutFree)     return false;
+  switch (prefs.dietary) {
+    case 'vegan':       return !!item.isVegan;
+    case 'vegetarian':  return !!item.isVegetarian || !!item.isVegan;
     case 'pescetarian': return !!item.isPescetarian || !!item.isVegetarian || !!item.isVegan;
-    default: return true;
+    default:            return true;
   }
 }
 
@@ -55,19 +58,19 @@ function buildCombination(shopId: ShopId, preferences: Preferences): Combination
     (i) =>
       i.slot === 'main' &&
       preferences.mains.includes(i.category as MainCategory) &&
-      matchesDietary(i, preferences.dietary, preferences.glutenFree),
+      matchesDietary(i, preferences),
   );
   const snackItems = shop.items.filter(
     (i) =>
       i.slot === 'snack' &&
       preferences.snacks.includes(i.category as SnackCategory) &&
-      matchesDietary(i, preferences.dietary, preferences.glutenFree),
+      matchesDietary(i, preferences),
   );
   const drinkItems = shop.items.filter(
     (i) =>
       i.slot === 'drink' &&
       preferences.drinks.includes(i.category as DrinkCategory) &&
-      matchesDietary(i, preferences.dietary, preferences.glutenFree),
+      matchesDietary(i, preferences),
   );
 
   if (!mainItems.length || !snackItems.length || !drinkItems.length) return null;
@@ -90,21 +93,21 @@ function shuffleSlot(combination: Combination, slot: SlotType, preferences: Pref
       (i) =>
         i.slot === 'main' &&
         preferences.mains.includes(i.category as MainCategory) &&
-        matchesDietary(i, preferences.dietary, preferences.glutenFree),
+        matchesDietary(i, preferences),
     );
   } else if (slot === 'snack') {
     pool = shop.items.filter(
       (i) =>
         i.slot === 'snack' &&
         preferences.snacks.includes(i.category as SnackCategory) &&
-        matchesDietary(i, preferences.dietary, preferences.glutenFree),
+        matchesDietary(i, preferences),
     );
   } else {
     pool = shop.items.filter(
       (i) =>
         i.slot === 'drink' &&
         preferences.drinks.includes(i.category as DrinkCategory) &&
-        matchesDietary(i, preferences.dietary, preferences.glutenFree),
+        matchesDietary(i, preferences),
     );
   }
 
@@ -122,6 +125,9 @@ const defaultPreferences: Preferences = {
   drinks: [...ALL_DRINK_CATEGORIES],
   dietary: 'none',
   glutenFree: false,
+  dairyFree: false,
+  halal: false,
+  nutFree: false,
 };
 
 function reducer(state: AppState, action: AppAction): AppState {

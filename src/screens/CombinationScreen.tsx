@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { MealSlot } from '../components/MealSlot';
 import { shopById } from '../data';
+import { formatPrice } from '../types';
 import type { SlotType } from '../types';
 
 export function CombinationScreen() {
@@ -16,6 +17,9 @@ export function CombinationScreen() {
       c.snack.id === combo.snack.id &&
       c.drink.id === combo.drink.id,
   );
+
+  const individualTotal = combo.main.price + combo.snack.price + combo.drink.price;
+  const savings = individualTotal - shop.mealDealPrice;
 
   function handleSave() {
     if (isSaved) return;
@@ -42,7 +46,7 @@ export function CombinationScreen() {
       </div>
 
       <div className="flex-1 max-w-4xl w-full mx-auto px-5 pt-5">
-        {/* On desktop: 3 slots side by side */}
+        {/* Slots */}
         <div className="flex flex-col md:flex-row gap-3">
           <div className="flex-1">
             <MealSlot slot="main"  item={combo.main}  onShuffle={() => handleShuffle('main')}  />
@@ -53,6 +57,24 @@ export function CombinationScreen() {
           <div className="flex-1">
             <MealSlot slot="drink" item={combo.drink} onShuffle={() => handleShuffle('drink')} />
           </div>
+        </div>
+
+        {/* Price summary */}
+        <div className="mt-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+          <div className="flex items-center justify-between text-sm text-gray-500 mb-2">
+            <span>Individual prices</span>
+            <span className="line-through">{formatPrice(individualTotal)}</span>
+          </div>
+          <div className="flex items-center justify-between text-sm font-semibold text-gray-900 mb-2">
+            <span>Meal deal price</span>
+            <span>{formatPrice(shop.mealDealPrice)}</span>
+          </div>
+          {savings > 0 && (
+            <div className="flex items-center justify-between text-sm font-bold text-green-600 pt-2 border-t border-gray-100">
+              <span>You save</span>
+              <span>{formatPrice(savings)}</span>
+            </div>
+          )}
         </div>
       </div>
 

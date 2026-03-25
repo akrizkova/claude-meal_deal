@@ -1,4 +1,5 @@
 import type { MealDealItem, SlotType } from '../types';
+import { formatPrice } from '../types';
 
 const slotLabel: Record<SlotType, string> = {
   main: 'Main',
@@ -20,7 +21,7 @@ interface Props {
 
 export function MealSlot({ slot, item, onShuffle }: Props) {
   return (
-    <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex items-center gap-3">
+    <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex items-center gap-3 h-full">
       <div className="flex flex-col items-center min-w-10">
         <span className="text-2xl">{slotEmoji[slot]}</span>
         <span className="text-[10px] text-gray-400 font-medium uppercase tracking-wide mt-0.5">
@@ -29,23 +30,26 @@ export function MealSlot({ slot, item, onShuffle }: Props) {
       </div>
 
       <div className="flex-1 min-w-0">
-        <p className="font-semibold text-gray-900 text-sm leading-snug truncate">{item.name}</p>
+        <p className="font-semibold text-gray-900 text-sm leading-snug">{item.name}</p>
         <div className="flex items-center gap-2 mt-1 flex-wrap">
           <span className="text-[11px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full capitalize">
             {item.category}
           </span>
+          <span className="text-[11px] font-semibold text-gray-700">{formatPrice(item.price)}</span>
           {item.kcal !== undefined && (
             <span className="text-[11px] text-gray-400">{item.kcal} kcal</span>
           )}
           {item.isVegan && (
-            <span className="text-[11px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
-              Vegan
-            </span>
+            <span className="text-[11px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Vegan</span>
           )}
           {!item.isVegan && item.isVegetarian && (
-            <span className="text-[11px] bg-green-50 text-green-600 px-2 py-0.5 rounded-full">
-              Veggie
-            </span>
+            <span className="text-[11px] bg-green-50 text-green-600 px-2 py-0.5 rounded-full">Veggie</span>
+          )}
+          {item.isGlutenFree && (
+            <span className="text-[11px] bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full">GF</span>
+          )}
+          {item.isDairyFree && (
+            <span className="text-[11px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">DF</span>
           )}
         </div>
       </div>
