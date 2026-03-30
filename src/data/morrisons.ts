@@ -10,6 +10,7 @@ export const morrisons: ShopDefinition = {
   items: [
     // Mains
     { id: 'mor-main-001', shopId: 'morrisons', slot: 'main', category: 'sandwich', name: 'Morrisons The Best BLT', kcal: 430, price: 340, isHighProtein: true },
+    { id: 'mor-main-014', shopId: 'morrisons', slot: 'main', category: 'sandwich', name: 'Avocado & Sun-dried Tomato Sandwich', kcal: 320, price: 280, isVegan: true, isVegetarian: true, isPescetarian: true, isDairyFree: true, isLactoseFree: true, isNutFree: true },
     { id: 'mor-main-002', shopId: 'morrisons', slot: 'main', category: 'sandwich', name: 'Coronation Chicken Sandwich', kcal: 400, price: 310, isHighProtein: true },
     { id: 'mor-main-003', shopId: 'morrisons', slot: 'main', category: 'sandwich', name: "Ploughman's Cheddar & Pickle", kcal: 410, price: 295, isVegetarian: true, isNutFree: true, isHighProtein: true },
     { id: 'mor-main-004', shopId: 'morrisons', slot: 'main', category: 'wrap', name: 'The Best Smoked Salmon Wrap', kcal: 375, price: 380, isPescetarian: true, isHighProtein: true },
@@ -46,5 +47,7 @@ export const morrisons: ShopDefinition = {
     { id: 'mor-drink-007', shopId: 'morrisons', slot: 'drink', category: 'energy drink', name: 'Relentless Origin 500ml', brand: 'Relentless', kcal: 113, price: 165, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true },
     { id: 'mor-drink-008', shopId: 'morrisons', slot: 'drink', category: 'hot drink', name: 'Morrisons Cafe Latte', kcal: 95, price: 249, isVegetarian: true, isGlutenFree: true, isNutFree: true, isLowCalorie: true },
     { id: 'mor-drink-009', shopId: 'morrisons', slot: 'drink', category: 'iced coffee', name: 'Morrisons Iced Coffee', kcal: 105, price: 199, isVegetarian: true, isGlutenFree: true, isNutFree: true },
+    { id: 'mor-drink-010', shopId: 'morrisons', slot: 'drink', category: 'hot drink', name: 'Morrisons Americano', kcal: 5, price: 229, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true, isLowCalorie: true },
+    { id: 'mor-drink-011', shopId: 'morrisons', slot: 'drink', category: 'iced coffee', name: 'Morrisons Iced Black Coffee', kcal: 10, price: 229, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true, isLowCalorie: true },
   ],
 };

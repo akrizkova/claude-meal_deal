@@ -45,7 +45,8 @@ function matchesDietary(item: MealDealItem, prefs: Preferences): boolean {
   if (prefs.lactoseFree && !item.isLactoseFree)  return false;
   if (prefs.halal       && !item.isHalal)        return false;
   if (prefs.nutFree     && !item.isNutFree)      return false;
-  if (prefs.highProtein && !item.isHighProtein)  return false;
+  // highProtein is a food filter — drinks aren't expected to be high-protein
+  if (prefs.highProtein && item.slot !== 'drink' && !item.isHighProtein) return false;
   if (prefs.lowCalorie  && !item.isLowCalorie)   return false;
   switch (prefs.dietary) {
     case 'vegan':       return !!item.isVegan;

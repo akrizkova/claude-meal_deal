@@ -9,6 +9,7 @@ export const marks_spencer: ShopDefinition = {
   mealDealPrice: 500, // £5.00
   items: [
     { id: 'ms-main-001', shopId: 'marks_spencer', slot: 'main', category: 'sandwich', name: 'M&S Gastropub Coronation Chicken', kcal: 465, price: 450, isHighProtein: true },
+    { id: 'ms-main-013', shopId: 'marks_spencer', slot: 'main', category: 'sandwich', name: 'M&S Avocado & Pine Nut Sandwich', kcal: 345, price: 430, isVegan: true, isVegetarian: true, isPescetarian: true, isDairyFree: true, isLactoseFree: true },
     { id: 'ms-main-002', shopId: 'marks_spencer', slot: 'main', category: 'sandwich', name: 'Smoked Scottish Salmon & Cream Cheese', kcal: 390, price: 490, isPescetarian: true, isNutFree: true, isHighProtein: true },
     { id: 'ms-main-003', shopId: 'marks_spencer', slot: 'main', category: 'sandwich', name: 'Wiltshire Cured Ham & Mustard', kcal: 380, price: 420, isHighProtein: true },
     { id: 'ms-main-004', shopId: 'marks_spencer', slot: 'main', category: 'sandwich', name: 'Mature Cheddar & Pickle', kcal: 420, price: 410, isVegetarian: true, isNutFree: true, isHighProtein: true },
@@ -37,6 +38,8 @@ export const marks_spencer: ShopDefinition = {
     { id: 'ms-drink-005', shopId: 'marks_spencer', slot: 'drink', category: 'smoothie', name: 'M&S Green Smoothie', kcal: 120, price: 299, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true },
     { id: 'ms-drink-006', shopId: 'marks_spencer', slot: 'drink', category: 'iced coffee', name: 'M&S Cold Brew Coffee', kcal: 50, price: 249, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true, isLowCalorie: true },
     { id: 'ms-drink-007', shopId: 'marks_spencer', slot: 'drink', category: 'hot drink', name: 'M&S Café Flat White', kcal: 75, price: 329, isVegetarian: true, isGlutenFree: true, isNutFree: true, isLowCalorie: true },
+    { id: 'ms-drink-009', shopId: 'marks_spencer', slot: 'drink', category: 'hot drink', name: 'M&S Americano', kcal: 5, price: 299, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true, isLowCalorie: true },
+    { id: 'ms-drink-010', shopId: 'marks_spencer', slot: 'drink', category: 'iced coffee', name: 'M&S Cold Brew Black', kcal: 10, price: 299, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true, isLowCalorie: true },
     { id: 'ms-drink-008', shopId: 'marks_spencer', slot: 'drink', category: 'energy drink', name: 'Red Bull Original 250ml', brand: 'Red Bull', kcal: 113, price: 165, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true },
   ],
 };

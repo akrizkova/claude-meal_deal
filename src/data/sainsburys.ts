@@ -11,6 +11,7 @@ export const sainsburys: ShopDefinition = {
     // Mains
     { id: 'sb-main-001', shopId: 'sainsburys', slot: 'main', category: 'sandwich', name: "Sainsbury's Chicken & Bacon Club", kcal: 440, price: 350, isHighProtein: true },
     { id: 'sb-main-002', shopId: 'sainsburys', slot: 'main', category: 'sandwich', name: "Mature Cheddar Ploughman's", kcal: 395, price: 310, isVegetarian: true, isNutFree: true, isHighProtein: true },
+    { id: 'sb-main-014', shopId: 'sainsburys', slot: 'main', category: 'sandwich', name: 'Houmous & Roasted Veg Sandwich', kcal: 310, price: 290, isVegan: true, isVegetarian: true, isPescetarian: true, isDairyFree: true, isLactoseFree: true, isNutFree: true, isLowCalorie: true },
     { id: 'sb-main-003', shopId: 'sainsburys', slot: 'main', category: 'sandwich', name: 'Prawn Marie Rose', kcal: 350, price: 330, isPescetarian: true, isNutFree: true, isHighProtein: true },
     { id: 'sb-main-004', shopId: 'sainsburys', slot: 'main', category: 'wrap', name: 'Red Thai Chicken Wrap', kcal: 410, price: 340, isHighProtein: true },
     { id: 'sb-main-005', shopId: 'sainsburys', slot: 'main', category: 'wrap', name: 'Vegan Katsu Wrap', kcal: 380, price: 330, isVegan: true, isVegetarian: true, isPescetarian: true, isDairyFree: true, isLactoseFree: true },
@@ -45,6 +46,8 @@ export const sainsburys: ShopDefinition = {
     { id: 'sb-drink-006', shopId: 'sainsburys', slot: 'drink', category: 'smoothie', name: 'Innocent Strawberry & Banana 300ml', brand: 'Innocent', kcal: 144, price: 249, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true },
     { id: 'sb-drink-007', shopId: 'sainsburys', slot: 'drink', category: 'energy drink', name: 'Lucozade Energy Original 380ml', brand: 'Lucozade', kcal: 266, price: 165, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true },
     { id: 'sb-drink-008', shopId: 'sainsburys', slot: 'drink', category: 'hot drink', name: "Sainsbury's Flat White", kcal: 80, price: 299, isVegetarian: true, isGlutenFree: true, isNutFree: true, isLowCalorie: true },
+    { id: 'sb-drink-010', shopId: 'sainsburys', slot: 'drink', category: 'hot drink', name: "Sainsbury's Americano", kcal: 5, price: 249, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true, isLowCalorie: true },
+    { id: 'sb-drink-011', shopId: 'sainsburys', slot: 'drink', category: 'iced coffee', name: "Sainsbury's Iced Black Coffee", kcal: 10, price: 249, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true, isLowCalorie: true },
     { id: 'sb-drink-009', shopId: 'sainsburys', slot: 'drink', category: 'iced coffee', name: 'Emmi Caffè Latte 230ml', brand: 'Emmi', kcal: 115, price: 219, isVegetarian: true, isGlutenFree: true, isNutFree: true },
   ],
 };

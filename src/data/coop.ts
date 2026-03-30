@@ -9,6 +9,7 @@ export const coop: ShopDefinition = {
   mealDealPrice: 350, // £3.50 with Co-op member card
   items: [
     { id: 'coop-main-001', shopId: 'coop', slot: 'main', category: 'sandwich', name: 'Co-op Irresistible Coronation Chicken', kcal: 415, price: 340, isHighProtein: true },
+    { id: 'coop-main-013', shopId: 'coop', slot: 'main', category: 'sandwich', name: 'Roasted Pepper & Hummus Sandwich', kcal: 300, price: 280, isVegan: true, isVegetarian: true, isPescetarian: true, isDairyFree: true, isLactoseFree: true, isNutFree: true },
     { id: 'coop-main-002', shopId: 'coop', slot: 'main', category: 'sandwich', name: 'Tuna Mayonnaise & Sweetcorn', kcal: 360, price: 299, isPescetarian: true, isNutFree: true, isHighProtein: true },
     { id: 'coop-main-003', shopId: 'coop', slot: 'main', category: 'sandwich', name: 'Brie & Cranberry', kcal: 400, price: 320, isVegetarian: true, isNutFree: true, isHighProtein: true },
     { id: 'coop-main-004', shopId: 'coop', slot: 'main', category: 'wrap', name: 'Chicken Tikka Wrap', kcal: 430, price: 350, isHighProtein: true },
@@ -38,5 +39,7 @@ export const coop: ShopDefinition = {
     { id: 'coop-drink-006', shopId: 'coop', slot: 'drink', category: 'energy drink', name: 'Monster Energy Zero 500ml', brand: 'Monster', kcal: 10, price: 175, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true, isLowCalorie: true },
     { id: 'coop-drink-007', shopId: 'coop', slot: 'drink', category: 'hot drink', name: 'Co-op Café Latte', kcal: 90, price: 279, isVegetarian: true, isGlutenFree: true, isNutFree: true, isLowCalorie: true },
     { id: 'coop-drink-008', shopId: 'coop', slot: 'drink', category: 'iced coffee', name: 'Emmi Caffè Latte 230ml', brand: 'Emmi', kcal: 115, price: 219, isVegetarian: true, isGlutenFree: true, isNutFree: true },
+    { id: 'coop-drink-009', shopId: 'coop', slot: 'drink', category: 'hot drink', name: 'Co-op Americano', kcal: 5, price: 249, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true, isLowCalorie: true },
+    { id: 'coop-drink-010', shopId: 'coop', slot: 'drink', category: 'iced coffee', name: 'Co-op Iced Black Coffee', kcal: 10, price: 249, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true, isLowCalorie: true },
   ],
 };

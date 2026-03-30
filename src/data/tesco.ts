@@ -11,6 +11,7 @@ export const tesco: ShopDefinition = {
     // Mains
     { id: 'tesco-main-001', shopId: 'tesco', slot: 'main', category: 'sandwich', name: 'Tesco Finest BLT', kcal: 420, price: 360, isHighProtein: true },
     { id: 'tesco-main-002', shopId: 'tesco', slot: 'main', category: 'sandwich', name: 'Egg & Cress Sandwich', kcal: 310, price: 290, isVegetarian: true, isNutFree: true, isHighProtein: true },
+    { id: 'tesco-main-013', shopId: 'tesco', slot: 'main', category: 'sandwich', name: 'Tesco Avocado & Hummus Sandwich', kcal: 330, price: 299, isVegan: true, isVegetarian: true, isPescetarian: true, isDairyFree: true, isLactoseFree: true, isNutFree: true },
     { id: 'tesco-main-003', shopId: 'tesco', slot: 'main', category: 'sandwich', name: 'Chicken & Stuffing Sandwich', kcal: 385, price: 310, isHighProtein: true },
     { id: 'tesco-main-004', shopId: 'tesco', slot: 'main', category: 'wrap', name: 'Chicken Caesar Wrap', kcal: 390, price: 330, isHighProtein: true },
     { id: 'tesco-main-005', shopId: 'tesco', slot: 'main', category: 'wrap', name: 'Falafel & Houmous Wrap', kcal: 350, price: 310, isVegan: true, isVegetarian: true, isPescetarian: true, isDairyFree: true, isLactoseFree: true },

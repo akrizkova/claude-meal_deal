@@ -14,6 +14,8 @@ export const greggs: ShopDefinition = {
     { id: 'greggs-main-004', shopId: 'greggs', slot: 'main', category: 'hot food', name: 'Chicken Bake', kcal: 395, price: 165, isHighProtein: true },
     { id: 'greggs-main-005', shopId: 'greggs', slot: 'main', category: 'hot food', name: 'Vegan Steak Bake', kcal: 392, price: 165, isVegan: true, isVegetarian: true, isPescetarian: true, isDairyFree: true, isLactoseFree: true },
     { id: 'greggs-main-006', shopId: 'greggs', slot: 'main', category: 'sandwich', name: 'Egg & Cheese Sandwich', kcal: 345, price: 280, isVegetarian: true, isNutFree: true, isHighProtein: true },
+    { id: 'greggs-main-013', shopId: 'greggs', slot: 'main', category: 'sandwich', name: 'Vegan BLT Sandwich', kcal: 295, price: 270, isVegan: true, isVegetarian: true, isPescetarian: true, isDairyFree: true, isLactoseFree: true, isNutFree: true },
+    { id: 'greggs-main-014', shopId: 'greggs', slot: 'main', category: 'soup', name: 'Tomato & Basil Soup', kcal: 130, price: 190, isVegan: true, isVegetarian: true, isPescetarian: true, isDairyFree: true, isLactoseFree: true, isNutFree: true, isLowCalorie: true },
     { id: 'greggs-main-007', shopId: 'greggs', slot: 'main', category: 'sandwich', name: 'BLT Sandwich', kcal: 360, price: 299, isNutFree: true, isHighProtein: true },
     { id: 'greggs-main-008', shopId: 'greggs', slot: 'main', category: 'sandwich', name: 'Tuna Crunch Sandwich', kcal: 355, price: 285, isPescetarian: true, isNutFree: true, isHighProtein: true },
     { id: 'greggs-main-009', shopId: 'greggs', slot: 'main', category: 'wrap', name: 'Chicken & Bacon Wrap', kcal: 420, price: 310, isHighProtein: true },
@@ -38,5 +40,6 @@ export const greggs: ShopDefinition = {
     { id: 'greggs-drink-006', shopId: 'greggs', slot: 'drink', category: 'water', name: 'Still Water 500ml', kcal: 0, price: 65, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true, isLowCalorie: true },
     { id: 'greggs-drink-007', shopId: 'greggs', slot: 'drink', category: 'juice', name: 'Tropicana Orange 250ml', brand: 'Tropicana', kcal: 98, price: 160, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true },
     { id: 'greggs-drink-008', shopId: 'greggs', slot: 'drink', category: 'iced coffee', name: 'Greggs Iced Latte', kcal: 115, price: 269, isVegetarian: true, isGlutenFree: true, isNutFree: true },
+    { id: 'greggs-drink-009', shopId: 'greggs', slot: 'drink', category: 'iced coffee', name: 'Greggs Iced Black Coffee', kcal: 5, price: 249, isVegan: true, isVegetarian: true, isPescetarian: true, isGlutenFree: true, isDairyFree: true, isLactoseFree: true, isNutFree: true, isLowCalorie: true },
   ],
 };
