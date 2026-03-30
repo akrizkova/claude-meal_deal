@@ -1,4 +1,4 @@
-export type ShopId = 'tesco' | 'sainsburys' | 'morrisons' | 'boots' | 'coop' | 'marks_spencer' | 'greggs' | 'pret';
+export type ShopId = 'tesco' | 'sainsburys' | 'morrisons' | 'boots' | 'coop' | 'marks_spencer' | 'greggs';
 
 export type MainCategory = 'sandwich' | 'wrap' | 'salad' | 'sushi' | 'pasta' | 'soup' | 'hot food' | 'baguette' | 'roll' | 'bowl';
 export type SnackCategory = 'crisps' | 'savoury snack' | 'chocolate' | 'sweet snack' | 'fruit' | 'cake/pastry' | 'cereal bar' | 'nuts';

@@ -6,9 +6,8 @@ import { boots } from './boots';
 import { coop } from './coop';
 import { marks_spencer } from './marks_spencer';
 import { greggs } from './greggs';
-import { pret } from './pret';
 
-export const shops: ShopDefinition[] = [tesco, sainsburys, morrisons, boots, coop, marks_spencer, greggs, pret];
+export const shops: ShopDefinition[] = [tesco, sainsburys, morrisons, boots, coop, marks_spencer, greggs];
 
 export const shopById: Record<ShopId, ShopDefinition> = {
   tesco,
@@ -18,5 +17,4 @@ export const shopById: Record<ShopId, ShopDefinition> = {
   coop,
   marks_spencer,
   greggs,
-  pret,
 };
