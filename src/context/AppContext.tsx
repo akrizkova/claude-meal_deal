@@ -39,10 +39,13 @@ function generateId(): string {
 }
 
 function matchesDietary(item: MealDealItem, prefs: Preferences): boolean {
-  if (prefs.glutenFree && !item.isGlutenFree) return false;
-  if (prefs.dairyFree  && !item.isDairyFree)  return false;
-  if (prefs.halal      && !item.isHalal)       return false;
-  if (prefs.nutFree    && !item.isNutFree)     return false;
+  if (prefs.glutenFree  && !item.isGlutenFree)   return false;
+  if (prefs.dairyFree   && !item.isDairyFree)    return false;
+  if (prefs.lactoseFree && !item.isLactoseFree)  return false;
+  if (prefs.halal       && !item.isHalal)        return false;
+  if (prefs.nutFree     && !item.isNutFree)      return false;
+  if (prefs.highProtein && !item.isHighProtein)  return false;
+  if (prefs.lowCalorie  && !item.isLowCalorie)   return false;
   switch (prefs.dietary) {
     case 'vegan':       return !!item.isVegan;
     case 'vegetarian':  return !!item.isVegetarian || !!item.isVegan;
@@ -126,8 +129,11 @@ const defaultPreferences: Preferences = {
   dietary: 'none',
   glutenFree: false,
   dairyFree: false,
+  lactoseFree: false,
   halal: false,
   nutFree: false,
+  highProtein: false,
+  lowCalorie: false,
 };
 
 function reducer(state: AppState, action: AppAction): AppState {

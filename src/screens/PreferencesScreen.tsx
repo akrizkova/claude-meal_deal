@@ -16,28 +16,44 @@ const DIETARY_OPTIONS: { value: DietaryType; label: string; emoji: string }[] = 
   { value: 'pescetarian', label: 'Pescetarian',    emoji: '🐟' },
 ];
 
-const EXTRA_FILTERS: { key: 'glutenFree' | 'dairyFree' | 'halal' | 'nutFree'; label: string; emoji: string }[] = [
-  { key: 'glutenFree', label: 'Gluten-free', emoji: '🌾' },
-  { key: 'dairyFree',  label: 'Dairy-free',  emoji: '🥛' },
-  { key: 'halal',      label: 'Halal',       emoji: '☪️' },
-  { key: 'nutFree',    label: 'Nut-free',    emoji: '🥜' },
+type ExtraKey = 'glutenFree' | 'dairyFree' | 'lactoseFree' | 'halal' | 'nutFree' | 'highProtein' | 'lowCalorie';
+
+const EXTRA_FILTERS: { key: ExtraKey; label: string; emoji: string }[] = [
+  { key: 'glutenFree',   label: 'Gluten-free',    emoji: '🌾' },
+  { key: 'dairyFree',    label: 'Dairy-free',     emoji: '🥛' },
+  { key: 'lactoseFree',  label: 'Lactose-free',   emoji: '🧀' },
+  { key: 'halal',        label: 'Halal',          emoji: '☪️' },
+  { key: 'nutFree',      label: 'Nut-free',       emoji: '🥜' },
+  { key: 'highProtein',  label: 'High protein',   emoji: '💪' },
+  { key: 'lowCalorie',   label: 'Low calorie',    emoji: '🔥' },
 ];
 
 export function PreferencesScreen() {
   const { state, dispatch } = useApp();
   const shop = shopById[state.selectedShop!];
 
-  const [mains, setMains]       = useState<MainCategory[]>([...ALL_MAIN_CATEGORIES]);
-  const [snacks, setSnacks]     = useState<SnackCategory[]>([...ALL_SNACK_CATEGORIES]);
-  const [drinks, setDrinks]     = useState<DrinkCategory[]>([...ALL_DRINK_CATEGORIES]);
-  const [dietary, setDietary]   = useState<DietaryType>('none');
-  const [extras, setExtras]     = useState({ glutenFree: false, dairyFree: false, halal: false, nutFree: false });
+  const [mains, setMains]     = useState<MainCategory[]>(state.preferences.mains);
+  const [snacks, setSnacks]   = useState<SnackCategory[]>(state.preferences.snacks);
+  const [drinks, setDrinks]   = useState<DrinkCategory[]>(state.preferences.drinks);
+  const [dietary, setDietary] = useState<DietaryType>(state.preferences.dietary);
+  const [extras, setExtras]   = useState<Record<ExtraKey, boolean>>({
+    glutenFree:  state.preferences.glutenFree,
+    dairyFree:   state.preferences.dairyFree,
+    lactoseFree: state.preferences.lactoseFree,
+    halal:       state.preferences.halal,
+    nutFree:     state.preferences.nutFree,
+    highProtein: state.preferences.highProtein,
+    lowCalorie:  state.preferences.lowCalorie,
+  });
 
-  function toggleExtra(key: keyof typeof extras) {
+  function toggleExtra(key: ExtraKey) {
     setExtras((prev) => ({ ...prev, [key]: !prev[key] }));
   }
 
+  const canGenerate = mains.length > 0 && snacks.length > 0 && drinks.length > 0;
+
   function handleGenerate() {
+    if (!canGenerate) return;
     dispatch({
       type: 'SET_PREFERENCES',
       payload: { mains, snacks, drinks, dietary, ...extras },
@@ -123,9 +139,17 @@ export function PreferencesScreen() {
       </div>
 
       <div className="px-5 pt-2 max-w-4xl w-full mx-auto">
+        {!canGenerate && (
+          <p className="text-sm text-red-500 mb-2 text-center">
+            Please select at least one option for each category.
+          </p>
+        )}
         <button
           onClick={handleGenerate}
-          className={`w-full py-4 rounded-2xl text-white font-bold text-base ${shop.colour} active:opacity-80 transition-opacity`}
+          disabled={!canGenerate}
+          className={`w-full py-4 rounded-2xl text-white font-bold text-base transition-opacity ${
+            canGenerate ? `${shop.colour} active:opacity-80` : 'bg-gray-300 cursor-not-allowed'
+          }`}
         >
           Build my meal deal →
         </button>

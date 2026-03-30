@@ -13,8 +13,6 @@ export function PreferenceCategoryGroup({ label, emoji, options, selected, onCha
 
   function toggle(value: string) {
     if (selected.includes(value)) {
-      // Don't allow deselecting the last one
-      if (selected.length === 1) return;
       onChange(selected.filter((v) => v !== value));
     } else {
       onChange([...selected, value]);
@@ -23,7 +21,7 @@ export function PreferenceCategoryGroup({ label, emoji, options, selected, onCha
 
   function toggleAll() {
     if (allSelected) {
-      onChange([options[0]]);
+      onChange([]);
     } else {
       onChange([...options]);
     }

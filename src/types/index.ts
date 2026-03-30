@@ -22,8 +22,11 @@ export interface MealDealItem {
   isPescetarian?: boolean;
   isGlutenFree?: boolean;
   isDairyFree?: boolean;
+  isLactoseFree?: boolean;
   isHalal?: boolean;
   isNutFree?: boolean;
+  isHighProtein?: boolean;
+  isLowCalorie?: boolean;
 }
 
 export interface ShopDefinition {
@@ -43,8 +46,11 @@ export interface Preferences {
   dietary: DietaryType;
   glutenFree: boolean;
   dairyFree: boolean;
+  lactoseFree: boolean;
   halal: boolean;
   nutFree: boolean;
+  highProtein: boolean;
+  lowCalorie: boolean;
 }
 
 export interface Combination {
