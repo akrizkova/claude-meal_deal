@@ -95,13 +95,17 @@ function pickSubset(arr, minSize = 0) {
   return shuffled.slice(0, size);
 }
 
-function randomPrefs(requireAtLeastOne = true) {
+function randomPrefs(requireAtLeastOne = true, shop = null) {
   const min = requireAtLeastOne ? 1 : 0;
+  // Use only categories that exist at this shop (mirrors the UI fix)
+  const availMains  = shop ? [...new Set(shop.items.filter(i => i.slot === 'main').map(i => i.category))]  : ALL_MAIN_CATEGORIES;
+  const availSnacks = shop ? [...new Set(shop.items.filter(i => i.slot === 'snack').map(i => i.category))] : ALL_SNACK_CATEGORIES;
+  const availDrinks = shop ? [...new Set(shop.items.filter(i => i.slot === 'drink').map(i => i.category))] : ALL_DRINK_CATEGORIES;
   return {
     dietary:    DIETARY_TYPES[Math.floor(Math.random() * DIETARY_TYPES.length)],
-    mains:      pickSubset(ALL_MAIN_CATEGORIES, min),
-    snacks:     pickSubset(ALL_SNACK_CATEGORIES, min),
-    drinks:     pickSubset(ALL_DRINK_CATEGORIES, min),
+    mains:      pickSubset(availMains, min),
+    snacks:     pickSubset(availSnacks, min),
+    drinks:     pickSubset(availDrinks, min),
     glutenFree:  Math.random() < 0.2,
     dairyFree:   Math.random() < 0.2,
     lactoseFree: Math.random() < 0.15,
@@ -167,8 +171,8 @@ for (const shop of shops) {
 
 // Run random tests
 for (let i = 0; i < RUNS; i++) {
-  const prefs = randomPrefs(true);
   for (const shop of shops) {
+    const prefs = randomPrefs(true, shop);
     const result = buildCombination(shop, prefs);
     if (!result.ok) {
       totalNoCombo++;
