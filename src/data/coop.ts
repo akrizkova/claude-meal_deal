@@ -6,7 +6,7 @@ export const coop: ShopDefinition = {
   colour: 'bg-teal-600',
   textColour: 'text-teal-600',
   borderColour: 'border-teal-600',
-  mealDealPrice: 350, // £3.50 with Co-op member card
+  mealDealPrice: 375, // £3.75 member price (£4.10 non-member)
   items: [
     { id: 'coop-main-001', shopId: 'coop', slot: 'main', category: 'sandwich', name: 'Co-op Irresistible Coronation Chicken', kcal: 415, price: 340, isHighProtein: true },
     { id: 'coop-main-013', shopId: 'coop', slot: 'main', category: 'sandwich', name: 'Roasted Pepper & Hummus Sandwich', kcal: 300, price: 280, isVegan: true, isVegetarian: true, isPescetarian: true, isDairyFree: true, isLactoseFree: true, isNutFree: true, isHalal: true },
