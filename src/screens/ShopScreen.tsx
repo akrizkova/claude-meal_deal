@@ -10,7 +10,7 @@ export function ShopScreen() {
       {/* Hero */}
       <div className="px-5 pt-12 pb-8 text-center max-w-lg mx-auto w-full">
         <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight mb-3">
-          Meal Deal Picker
+          Meal Deal Oracle
         </h1>
         <p className="text-gray-500 text-base leading-relaxed">
           Can't decide what to get? Pick a shop, set your preferences, and we'll build your perfect meal deal combo. Shuffle anything you don't fancy, or save deals to revisit later.
