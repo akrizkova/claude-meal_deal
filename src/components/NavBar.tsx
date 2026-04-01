@@ -31,7 +31,7 @@ export function NavBar() {
           }`}
         >
           <span className="text-xl">🥪</span>
-          <span>Picker</span>
+          <span>Oracle</span>
         </button>
         <button
           onClick={() => nav('saved')}
@@ -57,7 +57,7 @@ export function NavBar() {
           onClick={() => dispatch({ type: 'NAVIGATE', payload: 'shop' })}
           className="text-lg font-bold text-gray-900 mr-4"
         >
-          🥪 Meal Deal Picker
+          🥪 Meal Deal Oracle
         </button>
 
         <button
@@ -66,7 +66,7 @@ export function NavBar() {
             isPickerActive ? 'bg-gray-100 text-gray-900' : 'text-gray-500 hover:text-gray-900'
           }`}
         >
-          Picker
+          Oracle
         </button>
 
         <button
