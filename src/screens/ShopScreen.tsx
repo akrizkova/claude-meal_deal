@@ -53,9 +53,11 @@ export function ShopScreen() {
         ))}
       </div>
 
-      <p className="text-center text-xs text-gray-400 mt-auto mb-4 px-5 pt-8">
-        Items shown are representative of typical meal deal ranges.
-      </p>
+      <div className="mt-auto px-5 pt-8 pb-4 max-w-lg mx-auto w-full text-center">
+        <p className="text-xs text-gray-400 leading-relaxed">
+          <span className="font-semibold text-gray-500">Data disclaimer:</span> Item names, prices, and dietary information are hand-curated based on publicly available supermarket data and general UK meal deal knowledge as of early 2025. They are illustrative and <span className="italic">not</span> sourced from live store systems. Availability, prices, and ranges vary by location and change regularly — always check in-store before purchasing.
+        </p>
+      </div>
     </div>
   );
 }

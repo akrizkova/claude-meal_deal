@@ -16,7 +16,7 @@ function matchesDietary(item, prefs) {
   if (prefs.lactoseFree && !item.isLactoseFree)  return false;
   if (prefs.halal       && !item.isHalal)        return false;
   if (prefs.nutFree     && !item.isNutFree)      return false;
-  if (prefs.highProtein && !item.isHighProtein)  return false;
+  if (prefs.highProtein && item.slot !== 'drink' && !item.isHighProtein)  return false;
   if (prefs.lowCalorie  && !item.isLowCalorie)   return false;
   switch (prefs.dietary) {
     case 'vegan':       return !!item.isVegan;
@@ -40,7 +40,7 @@ async function loadShop(filePath) {
   return mod.default;
 }
 
-const shopFiles = ['tesco','sainsburys','morrisons','boots','coop','marks_spencer','greggs'];
+const shopFiles = ['tesco','sainsburys','morrisons','boots','coop','marks_spencer','waitrose'];
 const base = path.resolve(process.cwd(), 'src/data');
 const shops = await Promise.all(shopFiles.map(n => loadShop(path.join(base, `${n}.ts`))));
 
